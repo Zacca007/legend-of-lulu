@@ -21,7 +21,7 @@ namespace lulu
 
     public:
         // Costruttori
-         Actor(pair position, pair size, pair speed, Room *room);
+        Actor(pair position, pair size, pair speed, Room *room);
         Actor(pair position, pair size, pair speed, Room *room, const std::string &sprite);
         // In actor.hpp
         virtual ~Actor() = default;
