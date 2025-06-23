@@ -4,19 +4,10 @@
 
 namespace lulu
 {
-    Room::Room(const std::string &sprite)
-        : _sprite(sprite), _position({0.0f, 0.0f})
-    {
-    }
-
-    Room::Room(const std::string &sprite, const pair &position)
-        : _sprite(sprite), _position(position)
-    {
-    }
+    Room::Room(pair position, pair size) : _position(position), _size(size) {}
 
     Room::~Room()
     {
-        // Non eliminiamo gli attori, solo li rimuoviamo dal vettore
         _actors.clear();
     }
 
@@ -39,6 +30,20 @@ namespace lulu
         if (it != _actors.end())
         {
             _actors.erase(it);
+        }
+    }
+
+    void Room::_captureKey(int key)
+    {
+        _current_key = key;
+    }
+
+    void Room::tick(int key)
+    {
+        _captureKey(key);
+        for (Actor *actor : _actors)
+        {
+            actor->move();
         }
     }
 

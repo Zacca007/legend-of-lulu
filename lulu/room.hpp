@@ -1,6 +1,5 @@
 #pragma once
 #include "types.hpp"
-#include <string>
 #include <vector>
 #include <map>
 
@@ -15,24 +14,29 @@ namespace lulu
     {
     private:
         pair _position;
-        std::string _sprite;
+        pair _size;
         std::vector<Actor *> _actors;
         collisions _collisions;
+        int _current_key;
+        int _previous_key;
+
+        void _captureKey(int key);
 
     public:
         // Costruttori
-        Room(const std::string &sprite);
-        Room(const std::string &sprite, const pair &position);
+        Room(pair position, pair size);
         ~Room();
 
         // Getter inline
-        const std::string &sprite() const { return _sprite; }
         pair position() const { return _position; }
+        pair size() const { return _size; }
         const std::vector<Actor *> &actors() const { return _actors; }
+        int getCurrentKey() { return _current_key; }
 
-        // Metodi che verranno implementati nel .cpp
+        // Metodi
         void add(Actor *actor);
         void kill(Actor *actor);
+        void tick(int key);
 
         // Operatori
         Room &operator+=(Actor &actor);
