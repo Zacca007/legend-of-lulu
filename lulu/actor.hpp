@@ -29,7 +29,6 @@ namespace lulu
         Room* room() const { return _room; }
         
         // Metodi che verranno implementati nel .cpp
-        void addToRoom();
         void setPosition(const pair& pos);
         void setSpeed(const pair& speed);
     };

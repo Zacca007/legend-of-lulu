@@ -1,5 +1,5 @@
-#include "room.hpp"
-#include "actor.hpp"
+#include "../lulu/room.hpp"
+#include "../lulu/actor.hpp"
 #include <algorithm>
 
 namespace lulu

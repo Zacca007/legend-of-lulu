@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "name": "NixOS-Raylib",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/nix/store/rksfnc70hdqm57xwhcby3qq4n6dmfp40-raylib-5.5/include",
+                "/nix/store/rksfnc70hdqm57xwhcby3qq4n6dmfp40-raylib-5.5/lib"
+            ],
+            "defines": [],
+            "compilerPath": "/nix/store/0fsnicvfpf55nkza12cjnad0w84d6ba7-gcc-wrapper-14.2.1.20250322/bin/gcc",
+            "cStandard": "c17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-x64"
+        }
+    ],
+    "version": 4
+}
