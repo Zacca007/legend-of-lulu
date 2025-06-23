@@ -17,10 +17,8 @@ namespace lulu
         pair _size;
         std::vector<Actor *> _actors;
         collisions _collisions;
-        int _current_key;
-        int _previous_key;
-
-        void _captureKey(int key);
+        std::vector<int> _current_keys;
+        std::vector<int> _previous_keys;
 
     public:
         // Costruttori
@@ -31,12 +29,12 @@ namespace lulu
         pair position() const { return _position; }
         pair size() const { return _size; }
         const std::vector<Actor *> &actors() const { return _actors; }
-        int getCurrentKey() { return _current_key; }
+        const std::vector<int> &currentKeys() const { return _current_keys; }
 
         // Metodi
         void add(Actor *actor);
         void kill(Actor *actor);
-        void tick(int key);
+        void tick(const std::vector<int> &keys);
 
         // Operatori
         Room &operator+=(Actor &actor);

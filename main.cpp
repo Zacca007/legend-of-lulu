@@ -1,12 +1,26 @@
-#include "raylib.h"
+#include <raylib.h>
 #include "lulu/lulu..hpp"
 #include <iostream>
+
+std::vector<int> getCurrentKeys()
+{
+    std::vector<int> active_keys;
+    for (int key = 32; key <= 348; ++key)
+    {
+        if (IsKeyDown(key))
+        {
+            active_keys.push_back(key);
+        }
+    }
+    return active_keys;
+}
 
 int main()
 {
     const lulu::pair screenSize{800, 550}, roomSize{600, 350}, roomPos{100, 100};
     lulu::Room room(roomPos, roomSize);
     lulu::Link link({roomSize.x / 2, roomSize.y / 2}, {50, 50}, {10, 10}, &room);
+    std::vector<int> active_keys;
 
     InitWindow(screenSize.x, screenSize.y, "Legend of Lulu - Room Test");
     Texture2D bg = LoadTexture("assets/rooms/room1.png");
@@ -20,10 +34,9 @@ int main()
 
         // Debug: disegna il rettangolo della zona calpestabile
         DrawRectangleLines(room.position().x, room.position().y, room.size().x, room.size().y, YELLOW);
-        int key = GetKeyPressed();
-        room.tick(key);
-        std::cout << key << std::endl;
-        std::cout << link.position().x << std::endl;
+
+        active_keys = getCurrentKeys();
+        room.tick(active_keys);
         EndDrawing();
     }
 

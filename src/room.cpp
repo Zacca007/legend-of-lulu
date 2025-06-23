@@ -33,14 +33,9 @@ namespace lulu
         }
     }
 
-    void Room::_captureKey(int key)
+    void Room::tick(const std::vector<int> &keys)
     {
-        _current_key = key;
-    }
-
-    void Room::tick(int key)
-    {
-        _captureKey(key);
+        _current_keys = keys;
         for (Actor *actor : _actors)
         {
             actor->move();

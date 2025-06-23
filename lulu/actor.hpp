@@ -19,6 +19,8 @@ namespace lulu
         std::string _sprite;
         Room *_room;
 
+        std::vector<std::string> collidingWalls() const;
+
     public:
         // Costruttori
         Actor(pair position, pair size, pair speed, Room *room);
