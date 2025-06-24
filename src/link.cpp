@@ -1,46 +1,51 @@
 #include "../lulu/link.hpp"
 #include "../lulu/room.hpp"
-#include <algorithm>
+#include "../lulu/types.hpp"
+
 namespace lulu
 {
-    Link::Link(pair position, pair size, pair speed, Room *room) : Actor(position, size, speed, room) {}
-    Link::Link(pair position, pair size, pair speed, Room *room, const std::string &sprite) : Actor(position, size, speed, room, sprite) {}
+    Link::Link(pair position, pair size, pair speed, Room *room)
+        : Actor(position, size, speed, room) {}
+
+    Link::Link(pair position, pair size, pair speed, Room *room, const std::string &sprite)
+        : Actor(position, size, speed, room, sprite) {}
 
     void Link::move()
     {
-        const std::vector<int> keys = _room->currentKeys();
-        const std::vector<std::string> walls = collidingWalls();
+        const std::vector<Key> &keys = _room->currentKeys();
+        const pair &roomPos = _room->position();
+        const pair &roomSize = _room->size();
 
         for (int key : keys)
         {
             switch (key)
             {
-            case 262: // right
-                if (std::find(walls.begin(), walls.end(), "right") == walls.end())
+            case right:
+                if (_position.x + _size.x + _speed.x <= roomPos.x + roomSize.x)
                     _position.x += _speed.x;
                 else
-                    _position.x = _room->position().x + _room->size().x - _size.x;
+                    _position.x = roomPos.x + roomSize.x - _size.x;
                 break;
 
-            case 263: // left
-                if (std::find(walls.begin(), walls.end(), "left") == walls.end())
+            case left:
+                if (_position.x - _speed.x >= roomPos.x)
                     _position.x -= _speed.x;
                 else
-                    _position.x = _room->position().x;
+                    _position.x = roomPos.x;
                 break;
 
-            case 264: // down
-                if (std::find(walls.begin(), walls.end(), "bottom") == walls.end())
+            case down:
+                if (_position.y + _size.y + _speed.y <= roomPos.y + roomSize.y)
                     _position.y += _speed.y;
                 else
-                    _position.y = _room->position().y + _room->size().y - _size.y;
+                    _position.y = roomPos.y + roomSize.y - _size.y;
                 break;
 
-            case 265: // up
-                if (std::find(walls.begin(), walls.end(), "top") == walls.end())
+            case up:
+                if (_position.y - _speed.y >= roomPos.y)
                     _position.y -= _speed.y;
                 else
-                    _position.y = _room->position().y;
+                    _position.y = roomPos.y;
                 break;
 
             default:
@@ -48,4 +53,4 @@ namespace lulu
             }
         }
     }
-} // namespace lulu
+}

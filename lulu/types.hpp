@@ -17,4 +17,12 @@ namespace lulu
             return {x - other.x, y - other.y};
         }
     };
+
+    enum Key
+    {
+        right = 262,
+        left = 263,
+        down = 264,
+        up = 265
+    };
 }

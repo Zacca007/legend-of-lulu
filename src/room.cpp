@@ -33,7 +33,7 @@ namespace lulu
         }
     }
 
-    void Room::tick(const std::vector<int> &keys)
+    void Room::tick(const std::vector<Key> &keys)
     {
         _current_keys = keys;
         for (Actor *actor : _actors)
