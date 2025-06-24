@@ -1,11 +1,14 @@
 #include <raylib.h>
 #include "lulu/lulu..hpp"
-#include <iostream>
+#include <vector>
+#include <array>
 
 std::vector<int> getCurrentKeys()
 {
     std::vector<int> active_keys;
-    for (int key = 32; key <= 348; ++key)
+    static const std::array<KeyboardKey, 4> keys_to_check = {KEY_DOWN, KEY_UP, KEY_LEFT, KEY_RIGHT}; // arrow keys
+
+    for (KeyboardKey key : keys_to_check)
     {
         if (IsKeyDown(key))
         {
@@ -19,7 +22,7 @@ int main()
 {
     const lulu::pair screenSize{800, 550}, roomSize{600, 350}, roomPos{100, 100};
     lulu::Room room(roomPos, roomSize);
-    lulu::Link link({roomSize.x / 2, roomSize.y / 2}, {50, 50}, {10, 10}, &room);
+    lulu::Link link({roomSize.x / 2, roomSize.y / 2}, {50, 50}, {15, 15}, &room);
     std::vector<int> active_keys;
 
     InitWindow(screenSize.x, screenSize.y, "Legend of Lulu - Room Test");

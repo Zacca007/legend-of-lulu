@@ -28,16 +28,26 @@ namespace lulu
     {
         std::vector<std::string> walls;
 
-        if (_position.x <= _room->position().x)
+        pair forward = _position + _speed;
+        pair back = _position - _speed;
+
+        // Sinistra
+        if (back.x <= _room->position().x)
             walls.push_back("left");
-        if (_position.y <= _room->position().y)
+
+        // Sopra
+        if (back.y <= _room->position().y)
             walls.push_back("top");
-        if (_position.x + _size.x >= _room->position().x + _room->size().x)
+
+        // Destra
+        if (forward.x + _size.x >= _room->position().x + _room->size().x)
             walls.push_back("right");
-        if (_position.y + _size.y >= _room->position().y + _room->size().y)
+
+        // Sotto
+        if (forward.y + _size.y >= _room->position().y + _room->size().y)
             walls.push_back("bottom");
 
-        return walls; // copia (ma ottimizzata con RVO o move)
+        return walls;
     }
 
     void Actor::move() {}
